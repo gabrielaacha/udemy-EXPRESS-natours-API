@@ -1,10 +1,10 @@
-## Express project: Natour's API
+## Express project: Natours' API
 
 ## Dependencies
 
 - express v.4
 
-`npm i express`
+`npm i express@4`
 
 ## Tools
 
