@@ -91,9 +91,9 @@ app.patch('/api/v1/tours/:id', (req, res) => {
       message: 'invalid ID',
     });
   }
-  res.status(201).json({
+  res.status(200).json({
     status: 'success',
-    message: 'id',
+    data: 'updated tour here',
   });
 });
 
