@@ -5,6 +5,16 @@ const app = express();
 
 app.use(express.json()); // this is a middleware
 
+app.use((req, res, next) => {
+  console.log('hello from the middleware');
+  next();
+});
+
+app.use((rew, res, next) => {
+  req.requestTime = new Date().toISOString;
+  next();
+});
+
 // app.get('/', (req, res) => {
 //   res
 //     .status(404)
