@@ -1,7 +1,12 @@
 const fs = require('fs');
 const express = require('express');
+const morgan = require('morgan'); // convention to name the variable same as the origin
 
 const app = express();
+
+// 1) MIDDLEWARES
+
+app.use(morgan('dev'));
 
 app.use(express.json()); // this is a middleware
 
@@ -18,6 +23,8 @@ app.use((rew, res, next) => {
 const tours = JSON.parse(
   fs.readFileSync(`${__dirname}/dev-data/data/tours-simple.json`)
 );
+
+// 2) ROUTE HANDLERS
 
 const getAllTours = (req, res) => {
   console.log(req.requestTime);
@@ -99,11 +106,21 @@ const deleteTour = (req, res) => {
 // app.patch('/api/v1/tours/:id', updateTour);
 // app.delete('/api/v1/tours/:id', deleteTour);
 
+// 3) ROUTES
+
 app.route('/api/v1/tours').get(getAllTours).post(createTour);
 
 app.route('/api/v1/tours:id').get(getTour).patch(updateTour).delete(deleteTour);
 
-// PORT
+app.route('/api/v1/users').get(getAllUsers).post(createUser);
+
+app
+  .route('/api/v1/users/:id')
+  .get(getUsers)
+  .patch(updateUser)
+  .delete(deleteUser);
+
+// 4) START SERVER
 
 const port = 3001;
 app.listen(port, () => {
