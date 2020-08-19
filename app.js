@@ -8,14 +8,11 @@ const app = express();
 // 1) MIDDLEWARES
 
 app.use(morgan('dev'));
-
 app.use(express.json()); // this is a middleware
-
 app.use((req, res, next) => {
   console.log('hello from the middleware');
   next();
 });
-
 app.use((req, res, next) => {
   req.requestTime = new Date().toISOString();
   next();
@@ -30,20 +27,9 @@ app.use((req, res, next) => {
 // app.delete('/api/v1/tours/:id', deleteTour);
 
 // 3) ROUTES
-// mounting the router
-// const tourRouter = express.Router();
-// const userRouter = express.Router();
 
-// tourRouter.route('/').get(getAllTours).post(createTour);
-
-// tourRouter.route('/:id').get(getTour).patch(updateTour).delete(deleteTour);
-
-// userRouter.route('/').get(getAllUsers).post(createUser);
-
-// userRouter.route('/:id').get(getUser).patch(updateUser).delete(deleteUser);
-
-// app.use('/api/v1/tours', tourRouter); // tourRouter is a real Middleware
-// app.use('/api/v1/users', userRouter); // tourRouter is a real Middleware
+app.use('/api/v1/tours', tourRouter); // tourRouter is a real Middleware
+app.use('/api/v1/users', userRouter); // tourRouter is a real Middleware
 
 // 4) START SERVER
 

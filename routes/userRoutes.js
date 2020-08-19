@@ -1,8 +1,10 @@
 const express = require('express');
+const router = express.Router();
+// const fs = require('fs');
 
-const tours = JSON.parse(
-  fs.readFileSync(`${__dirname}/../dev-data/data/tours-simple.json`)
-);
+// const tours = JSON.parse(
+//   fs.readFileSync(`${__dirname}/../dev-data/data/tours-simple.json`)
+// );
 
 const getAllUsers = (req, res) => {
   res.status(500).json({
@@ -40,9 +42,6 @@ const deleteUser = (req, res) => {
 };
 
 router.route('/').get(getAllUsers).post(createUser);
-
 router.route('/:id').get(getUser).patch(updateUser).delete(deleteUser);
-
-app.use('/api/v1/users', router); // tourRouter is a real Middleware
 
 module.exports = router;

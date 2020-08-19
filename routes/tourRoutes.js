@@ -1,4 +1,5 @@
 const express = require('express');
+const router = express.Router();
 const fs = require('fs');
 
 const tours = JSON.parse(
@@ -80,9 +81,6 @@ const deleteTour = (req, res) => {
 };
 
 router.route('/').get(getAllTours).post(createTour);
-
 router.route('/:id').get(getTour).patch(updateTour).delete(deleteTour);
-
-app.use('/api/v1/tours', router); // tourRouter is a real Middleware
 
 module.exports = router;
